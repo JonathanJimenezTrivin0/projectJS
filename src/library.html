@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="css/common.css" />
   </head>
   <body>
-    <header class="header">
+    <header class="header__library">
       <nav class="header__container">
         <a class="header__link" href="./index.html">
           <svg class="header__icon" width="24" height="24">
@@ -31,17 +31,9 @@
           </li>
         </ul>
       </nav>
-      <div class="formulario">
-        <form class="form">
-          <svg width="20" height="20">
-            <use class="form__icon" href="./images/icon.svg#icon-search"></use>
-          </svg>
-          <input type="text" />
-
-          <label class="form__label">
-            <span class="form__span">Search movie</span>
-          </label>
-        </form>
+      <div class="header__buton">
+        <button class="button__watched" type="button">Watched</button>
+        <button class="button__queue" type="button">queue</button>
       </div>
     </header>
   </body>

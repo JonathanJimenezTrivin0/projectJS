@@ -72,6 +72,16 @@ body {
   align-items: center;
 }
 
+.header__library {
+  width: 100%;
+  height: 230px;
+  padding-left: 71px;
+  padding-top: 41px;
+  background-image: url(/src/images/image-library-desktop.jpg);
+  background-size: cover;
+  background-position: right bottom;
+}
+
 .header__container {
   display: flex;
   justify-content: space-between;
@@ -176,7 +186,6 @@ body {
   color: var(--primary-color);
 }
 
-.form input:focus + .form__label .form__span,
 .form input:focus + .form__label .form__span {
   transform: translateY(-150%);
   font-size: 14px;
@@ -185,4 +194,55 @@ body {
 
 .form input:focus + .form__label::after {
   transform: translateX(0%);
+}
+
+/* --------------Pages library----------------- */
+
+.header__buton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 60px;
+  gap: 15px;
+  cursor: pointer;
+}
+
+.button__watched {
+  width: 136px;
+  height: 44px;
+  border-radius: 5px;
+  font-size: 12px;
+  line-height: 16px;
+  border: 1px solid #fff;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  background-color: transparent;
+  cursor: pointer;
+  color: var(--primary-color);
+  transition: background-color 250ms var(--cubic);
+}
+
+.button__queue {
+  width: 136px;
+  height: 44px;
+  border-radius: 5px;
+  font-size: 12px;
+  line-height: 16px;
+  border: 1px solid #fff;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  background-color: transparent;
+  cursor: pointer;
+  color: var(--primary-color);
+  transition: background-color 250ms var(--cubic);
+}
+.button__watched:focus,
+.button__watched:hover {
+  background-color: var(--goit-color);
+  border: none;
+}
+.button__queue:focus,
+.button__queue:hover {
+  background-color: var(--goit-color);
+  border: none;
 }
