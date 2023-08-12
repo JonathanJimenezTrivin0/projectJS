@@ -3,14 +3,42 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Homework 9</title>
+    <link rel="stylesheet" href="./css/common.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <title>Filmoteka</title>
     <link rel="stylesheet" href="css/common.css" />
   </head>
   <body>
-    <ul>
-      <li><a href="01-color-switcher.html">Color switcher</a></li>
-      <li><a href="02-timer.html">Countdown timer</a></li>
-      <li><a href="03-promises.html">Promise generator</a></li>
-    </ul>
+    <header class="header">
+      <nav class="header__container">
+        <a class="header__link" href="#">
+          <svg class="header__icon" width="24" height="24">
+            <use href="./images/icon.svg#icon-film"></use>
+          </svg>
+          Filmoteka
+        </a>
+        <ul class="header__menu">
+          <li class="header__list">
+            <a class="header__nav" href="#">Home</a>
+          </li>
+          <li class="header__list">
+            <a class="header__nav" href="#">my library</a>
+          </li>
+        </ul>
+      </nav>
+      <div class="formulario">
+        <form class="form">
+          <input type="text" />
+          <label class="form__label">
+            <span class="form__span">Search movie</span>
+          </label>
+        </form>
+      </div>
+    </header>
   </body>
 </html>
