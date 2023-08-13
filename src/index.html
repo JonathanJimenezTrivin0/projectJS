@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/common.css" />
+    <link rel="stylesheet" href="./sass/index.scss" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -11,38 +11,55 @@
       rel="stylesheet"
     />
     <title>Filmoteka</title>
-    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="./sass/index.scss" />
   </head>
   <body>
     <header class="header">
-      <nav class="header__container">
-        <a class="header__link" href="./index.html">
-          <svg class="header__icon" width="24" height="24">
-            <use href="./images/icon.svg#icon-film"></use>
-          </svg>
-          Filmoteka
-        </a>
-        <ul class="header__menu">
-          <li class="header__list">
-            <a class="header__nav" href="./index.html">Home</a>
-          </li>
-          <li class="header__list">
-            <a class="header__nav" href="./library.html">my library</a>
-          </li>
-        </ul>
-      </nav>
-      <div class="formulario">
-        <form class="form">
-          <svg width="20" height="20">
-            <use class="form__icon" href="./images/icon.svg#icon-search"></use>
-          </svg>
-          <input type="text" />
-
-          <label class="form__label">
-            <span class="form__span">Search movie</span>
-          </label>
-        </form>
+      <div class="container">
+        <nav class="header__container">
+          <div>
+            <svg class="header__icon" width="24" height="24">
+              <use href="./images/icon.svg#icon-film"></use>
+            </svg>
+            <a class="header__link" href="./index.html"> Filmoteka </a>
+          </div>
+          <ul class="header__menu">
+            <li class="header__list">
+              <a class="header__nav" href="./index.html">Home</a>
+            </li>
+            <li class="header__list">
+              <a class="header__nav" href="./library.html">my library</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="formulario">
+          <form class="form">
+            <svg class="form__icon">
+              <use href="./images/icon.svg#icon-search"></use>
+            </svg>
+            <input type="text" />
+            <label class="form__label">
+              <span class="form__span">Search movie</span>
+            </label>
+          </form>
+        </div>
       </div>
     </header>
+    <footer class="footer">
+      <ul class="footer__content list">
+        <li class="footer__text">
+          <p>© 2020 | All Rights Reserved |</p>
+        </li>
+        <li class="footer__text">
+          <div class="footer__favorite">
+            <p>Developed with</p>
+            <svg class="footer__icon">
+              <use href="./images/icon.svg#icon-favorite"></use>
+            </svg>
+            <p><u>by GoIT Students</u></p>
+          </div>
+        </li>
+      </ul>
+    </footer>
   </body>
 </html>
