@@ -3,14 +3,130 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Homework 9</title>
-    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="./sass/index.scss" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <title>Filmoteka</title>
+    <link rel="stylesheet" href="./sass/index.scss" />
   </head>
   <body>
-    <ul>
-      <li><a href="01-color-switcher.html">Color switcher</a></li>
-      <li><a href="02-timer.html">Countdown timer</a></li>
-      <li><a href="03-promises.html">Promise generator</a></li>
-    </ul>
+    <header class="header">
+      <div class="container">
+        <nav class="header__container">
+          <div>
+            <svg class="header__icon" width="24" height="24">
+              <use href="./images/icon.svg#icon-film"></use>
+            </svg>
+            <a class="header__link" href="./index.html"> Filmoteka </a>
+          </div>
+          <ul class="header__menu">
+            <li class="header__list">
+              <a class="header__nav" href="./index.html">Home</a>
+            </li>
+            <li class="header__list">
+              <a class="header__nav" href="./library.html">my library</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="formulario">
+          <form class="form">
+            <svg class="form__icon">
+              <use href="./images/icon.svg#icon-search"></use>
+            </svg>
+            <input type="text" />
+            <label class="form__label">
+              <span class="form__span">Search movie</span>
+            </label>
+          </form>
+        </div>
+      </div>
+    </header>
+
+    <section class="movies container">
+      <ul class="imagenes"></ul>
+      <ul class="paginacion">
+        <button class="button-pages left-Button">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12.6666 8H3.33325"
+              stroke="black"
+              stroke-width="1.33333"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M7.99992 12.6667L3.33325 8.00004L7.99992 3.33337"
+              stroke="black"
+              stroke-width="1.33333"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+        <button class="button-pages firstButton">1</button>
+        <p>...</p>
+        <ul class="botones"></ul>
+        <p>...</p>
+        <ul class="lastButton"></ul>
+        <button class="button-pages RightButton">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M3.33341 8H12.6667"
+              stroke="black"
+              stroke-width="1.33333"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M8.00008 12.6667L12.6667 8.00004L8.00008 3.33337"
+              stroke="black"
+              stroke-width="1.33333"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+      </ul>
+    </section>
+    <div>
+      <div class="backdrop is-hidden" data-modal>
+        <div class="modal"></div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <ul class="footer__content list">
+        <li class="footer__text">
+          <p>© 2020 | All Rights Reserved |</p>
+        </li>
+        <li class="footer__text">
+          <div class="footer__favorite">
+            <p>Developed with</p>
+            <svg class="footer__icon">
+              <use href="./images/icon.svg#icon-favorite"></use>
+            </svg>
+            <p><u>by GoIT Students</u></p>
+          </div>
+        </li>
+      </ul>
+    </footer>
+
+    <script src="./js/index.js" type="module"></script>
   </body>
 </html>
