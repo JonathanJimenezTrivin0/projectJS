@@ -17,9 +17,140 @@ a {
   margin: 0;
 }
 
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 882px;
+  flex-wrap: wrap;
+  height: 3260px;
+}
+
 img {
-  display: block;
-  max-width: 100%;
+  width: 274px;
+  height: 398px;
+}
+
+.button-pages {
+  width: 40px;
+  height: 40px;
+  color: #000;
+  font-family: Roboto;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px; /* 133.333% */
+  border-radius: 5px;
+  background: #f7f7f7;
+  border-color: #f7f7f7;
+  border: #f7f7f7;
+}
+
+.button-pages:hover {
+  color: #fff;
+  font-family: Roboto;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  border-radius: 5px;
+  background: #ff6b08;
+  border: #f7f7f7;
+}
+
+.button-pages-select {
+  width: 40px;
+  height: 40px;
+  color: #fff;
+  font-family: Roboto;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  border-radius: 5px;
+  background: #ff6b08;
+}
+
+.paginacion {
+  display: flex;
+}
+
+.botones {
+  margin-left: 0px;
+  padding: 0px;
+}
+
+.lastButton {
+  padding: 0px;
+}
+
+.firstButton {
+  padding: 0px;
+}
+
+.divImg {
+  width: 274px;
+  height: 440px;
+  background-color: #fff;
+}
+
+.imagenes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin: 0px;
+  padding: 0px;
+}
+
+.imgName {
+  color: #000;
+  font-family: Roboto;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: uppercase;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding-top: 10px;
+  margin: 0px;
+}
+
+.imgDate {
+  color: #ff6b08;
+  font-family: Roboto;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding: 0px;
+  margin: 0px;
+}
+
+.imgGenero {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.modal {
+  width: 528px;
+  height: 581px;
+  background-color: #ffffff;
+  position: fixed;
+  display: flex;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+}
+
+.is-hidden {
+  display: none;
   height: auto;
 }
 

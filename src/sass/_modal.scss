@@ -1,6 +1,16 @@
-.modal_watched {
-    width: 90%;
-    height: 90%;
-    margin: 0 auto;
-    
+.modal {
+    width: 528px;
+    height: 581px;
+    background-color: $primary-color;
+    position: fixed;
+    display: flex;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+}
+
+.is-hidden {
+    display: none;
+    height: auto;
 }
