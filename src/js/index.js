@@ -223,10 +223,13 @@ let searchButton = document.querySelector('.form__icon');
 searchButton.addEventListener('click', () => {
     let searchInput = document.querySelector('.form__label1');
   
-    fetch(`https://api.themoviedb.org/3/trending/all/day?language=en-US`, config)
+    fetch('https://api.themoviedb.org/3/trending/all/day?language=en-US', config)
       .then(response => response.json())
       .then(data => {
         const searchTerm = searchInput.value.toLowerCase();
+        console.log('Search term:', searchTerm); // Debugging statement
+        console.log('API data:', data.results); // Debugging statement
+
         const filterMovies = data.results.filter(item => {
           // Check if any of the title properties contain a whole word that matches the search term
           const titleWords = [
@@ -234,13 +237,15 @@ searchButton.addEventListener('click', () => {
             item.original_title,
             item.name
           ].filter(Boolean); // Filter out any undefined titles
-  
+
+          console.log('Title words:', titleWords); // Debugging statement
+
           return titleWords.some(title => new RegExp(`\\b${searchTerm}\\b`).test(title.toLowerCase()));
         });
-        console.log(filterMovies);
+        console.log('Filtered movies:', filterMovies); // Debugging statement
         // ... (do something with filtered results)
       });
-  });  
+});
 
 
 fetchAndDisplayData(page);
