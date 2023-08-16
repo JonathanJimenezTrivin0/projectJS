@@ -220,20 +220,27 @@ buttonPageRight.addEventListener('click', () => {
 
 let searchButton = document.querySelector('.form__icon');
 
-  searchButton.addEventListener('click', () => {
+searchButton.addEventListener('click', () => {
     let searchInput = document.querySelector('.form__label1');
-
+  
     fetch(`https://api.themoviedb.org/3/trending/all/day?language=en-US`, config)
       .then(response => response.json())
       .then(data => {
         const searchTerm = searchInput.value.toLowerCase();
         const filterMovies = data.results.filter(item => {
-          return item.title.toLowerCase().includes(searchTerm) || item.name.toLowerCase().includes(searchTerm);
+          // Check if any of the title properties contain a whole word that matches the search term
+          const titleWords = [
+            item.title,
+            item.original_title,
+            item.name
+          ].filter(Boolean); // Filter out any undefined titles
+  
+          return titleWords.some(title => new RegExp(`\\b${searchTerm}\\b`).test(title.toLowerCase()));
         });
         console.log(filterMovies);
         // ... (do something with filtered results)
       });
-  });
+  });  
 
 
 fetchAndDisplayData(page);
