@@ -218,5 +218,28 @@ buttonPageRight.addEventListener('click', () => {
     fetchAndDisplayData(page);
 });
 
+let searchButton = document.querySelector('.form__icon');
+
+  searchButton.addEventListener('click', () => {
+    let searchInput = document.querySelector('.form__label1');
+
+    fetch(`https://api.themoviedb.org/3/trending/all/day?language=en-US`, config)
+      .then(response => response.json())
+      .then(data => {
+        const searchTerm = searchInput.value.toLowerCase();
+        const filterMovies = data.results.filter(item => {
+          return item.title.toLowerCase().includes(searchTerm) || item.name.toLowerCase().includes(searchTerm);
+        });
+        console.log(filterMovies);
+        // ... (do something with filtered results)
+      });
+  });
+
+
 fetchAndDisplayData(page);
+
+
+
+
+
 
