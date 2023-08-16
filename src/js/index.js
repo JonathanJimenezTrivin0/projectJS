@@ -218,5 +218,5 @@ buttonPageRight.addEventListener('click', () => {
     fetchAndDisplayData(page);
 });
 
-// Llamar a la función inicial para cargar los datos
 fetchAndDisplayData(page);
+
