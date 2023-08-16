@@ -15,12 +15,14 @@
   </head>
   <body>
     <header class="header">
-      <div class="container">
+      <div class="">
         <nav class="header__container">
           <div>
-            <svg class="header__icon" width="24" height="24">
-              <use href="./images/icon.svg#icon-film"></use>
-            </svg>
+            <a href="./index.html">
+              <svg class="header__icon" width="24" height="24">
+                <use href="./images/icon.svg#icon-film"></use>
+              </svg>
+            </a>
             <a class="header__link" href="./index.html"> Filmoteka </a>
           </div>
           <ul class="header__menu">
@@ -46,8 +48,11 @@
       </div>
     </header>
 
-    <section class="movies container">
-      <ul class="imagenes"></ul>
+    <section class="container">
+      <ul class="movies">
+        <li class="imagenes"></li>
+      </ul>
+
       <ul class="paginacion">
         <button class="button-pages left-Button">
           <svg
@@ -121,7 +126,23 @@
             <svg class="footer__icon">
               <use href="./images/icon.svg#icon-favorite"></use>
             </svg>
-            <p><u>by GoIT Students</u></p>
+            <p id="openModalBtn" class="footer__description">
+              <u>by GoIT Students</u>
+            </p>
+            <div id="myModal" class="modal">
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                <ul class="modal__ul">
+                  <li class="modal__list">
+                    <h1 class="modal__list-color">Grupo #3</h1>
+                  </li>
+
+                  <li class="modal__list"><h2>Cristian Arango</h2></li>
+                  <li class="modal__list"><h2>Juan Manual Acevedo</h2></li>
+                  <li class="modal__list"><h2>Jonathan Jimenez</h2></li>
+                </ul>
+              </div>
+            </div>
           </div>
         </li>
       </ul>
