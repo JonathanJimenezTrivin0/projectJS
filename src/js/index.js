@@ -81,6 +81,10 @@ function fetchAndDisplayData(page) {
           let idMovie = document.querySelector('.idmovie');
           idMovie.textContent = item.id;
 
+          let idPage = document.querySelector('.idpage');
+          idPage.textContent = thePage;
+          console.log("thePage");
+
           let buttonClose = document.querySelector('.boton-cerrar'); //document.createElement('button');
           //   buttonClose.classList.add('boton-cerrar');
           buttonClose.textContent = 'X';
@@ -125,6 +129,17 @@ function fetchAndDisplayData(page) {
           //   modalDataButton1.classList.add('modalDataButton1');
           modalDataButton2.textContent = 'ADD TO QUEUE';
 
+          let release = document.querySelector('.releaseYear');
+          release.textContent =
+          genero1Name +
+          ',' +
+          ' ' +
+          genero2Name +
+          ' ' +
+          '|' +
+          ' ' +
+          releaseYear +
+          airYear;
           //   modal1.append(modalImg);
           //   modal1.append(buttonClose);
           //   modal1.append(modalTitle);
@@ -175,17 +190,6 @@ function fetchAndDisplayData(page) {
         imgDate.classList.add('imgDate');
         divImg.append(imgDate);
 
-        let release = document.querySelector('.releaseYear');
-        release.textContent =
-          genero1Name +
-          ',' +
-          ' ' +
-          genero2Name +
-          ' ' +
-          '|' +
-          ' ' +
-          releaseYear +
-          airYear;
       }
 
       // ... (creación de botones de página)

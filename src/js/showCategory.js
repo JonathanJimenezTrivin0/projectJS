@@ -28,6 +28,11 @@ const handlerShowWatched = () =>{
         releaseYear.textContent = element.releaseYear;
         releaseYear.classList.add('imgDate');
         ilImg.append(releaseYear);
+
+        let idmovie = document.createElement('p');
+        idmovie.textContent = element.idmovie;
+        idmovie.classList.add('idmovie-hidden');
+        ilImg.append(idmovie);
     });
 
 };

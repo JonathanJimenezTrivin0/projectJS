@@ -10,6 +10,7 @@ const handlerWatched = () => {
     let item = { 
         img: movie.querySelector(".modalImg").src,
         idmovie: movie.querySelector(".idmovie").textContent,
+        idpage: movie.querySelector(".idpage").textContent,
         imgName: movie.querySelector(".modalTitle").textContent,
         releaseYear: movie.querySelector(".releaseYear").textContent
         }
@@ -39,6 +40,7 @@ const handlerQueue = () => {
     let item = { 
         img: movie.querySelector(".modalImg").src,
         idmovie: movie.querySelector(".idmovie").textContent,
+        idpage: movie.querySelector(".idpage").textContent,
         imgName: movie.querySelector(".modalTitle").textContent,
         releaseYear: movie.querySelector(".releaseYear").textContent
         }
