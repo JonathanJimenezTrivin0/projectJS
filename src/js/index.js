@@ -221,39 +221,40 @@ buttonPageRight.addEventListener('click', () => {
 let searchButton = document.querySelector('.form__icon');
 
 searchButton.addEventListener('click', () => {
-    let searchInput = document.querySelector('.form__label1');
-
-
-    fetch(`https://api.themoviedb.org/3/trending/all/day?perPage=50&language=en-US`, config)
-      .then(response => response.json())
-      .then(data => {
-        const searchTerm = searchInput.value.toLowerCase();
-        console.log('Search term:', searchTerm); // Debugging statement
-        console.log('API data:', data.results); // Debugging statement
-
-        const filterMovies = data.results.filter(item => {
-          // Check if any of the title properties contain a whole word that matches the search term
-          const titleWords = [
-            item.title,
-            item.original_title,
-            item.name
-          ].filter(Boolean); // Filter out any undefined titles
-
-          console.log('Title words:', titleWords); // Debugging statement
-
-          return titleWords.some(title => new RegExp(`\\b${searchTerm}\\b`).test(title.toLowerCase()));
-        });
-        console.log('Filtered movies:', filterMovies); // Debugging statement
-        // ... (do something with filtered results)
-      });
+    let searchInput = document.querySelector('.form__label1').value.toLowerCase();
+    fetchAndSearchData(searchInput);
 });
 
+function fetchAndSearchData(searchTerm) {
+    let currentPage = 1;
+    let filteredResults = [];
 
-fetchAndDisplayData(page);
+    function fetchPage(page) {
+        console.log("Fetching data for page:", page);
+        fetch(`https://api.themoviedb.org/3/trending/all/day?page=${page}&language=en-US`, config)
+            .then(response => response.json())
+            .then(data => {
+                const filteredMovies = data.results.filter(item => {
+                    const titleWords = [
+                        item.title,
+                        item.original_title,
+                        item.name
+                    ].filter(Boolean);
 
+                    return titleWords.some(title => new RegExp(`\\b${searchTerm}\\b`).test(title.toLowerCase()));
+                });
 
+                filteredResults = filteredResults.concat(filteredMovies);
 
+                if (data.page < data.total_pages) {
+                    fetchPage(page + 1); // Fetch next page
+                } else {
+                    // Display or process filteredResults here
+                    console.log('Filtered movies:', filteredResults);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
 
-
-
-
+    fetchPage(currentPage);
+}
