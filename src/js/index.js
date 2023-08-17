@@ -222,8 +222,9 @@ let searchButton = document.querySelector('.form__icon');
 
 searchButton.addEventListener('click', () => {
     let searchInput = document.querySelector('.form__label1');
-  
-    fetch('https://api.themoviedb.org/3/trending/all/day?language=en-US', config)
+
+
+    fetch(`https://api.themoviedb.org/3/trending/all/day?perPage=50&language=en-US`, config)
       .then(response => response.json())
       .then(data => {
         const searchTerm = searchInput.value.toLowerCase();
@@ -249,6 +250,7 @@ searchButton.addEventListener('click', () => {
 
 
 fetchAndDisplayData(page);
+
 
 
 
