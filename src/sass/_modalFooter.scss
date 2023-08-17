@@ -1,13 +1,20 @@
-.modal {
+.modal__ftr {
+  display: none;
   width: 400px;
   height: 400px;
   font-size: 12px;
   border-radius: 50%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
   background: linear-gradient(
     -30deg,
-    $goit-color,
+    $secondary-color,
+    rgba(0, 0, 0, 0.3),
     $svg-film,
-    rgba(0, 0, 0, 0.1)
+    rgba(0, 0, 0, 0.2)
   );
   background-size: 400% 400%;
   animation: degrade 6s ease infinite;
