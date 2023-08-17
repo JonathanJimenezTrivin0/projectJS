@@ -4,19 +4,16 @@ const btnQueue = document.querySelector(".button__queue");
 
 const handlerShowWatched = () =>{
 
-    const watched = document.querySelector(".watched");
+    const watched = document.querySelector(".imagenes");
+    // console.log(watched);
     watched.innerHTML = '';
     
     const storage = JSON.parse(localStorage.getItem("moviesWatched"));
-    let ulImg = document.createElement('ul');
-    ulImg.classList.add('imagenes');
-    ulImg.classList.add('list');
-    watched.append(ulImg);
 
     storage.forEach(element => {
         let ilImg = document.createElement('li');
         ilImg.classList.add('divImg');
-        ulImg.append(ilImg);
+        watched.append(ilImg);
         
         let img = document.createElement('img');
         img.src = element.img;
@@ -38,19 +35,15 @@ const handlerShowWatched = () =>{
 
 const handlerShowbtnQueue = () =>{
 
-    const watched = document.querySelector(".watched");
-    watched.innerHTML = '';
+    const queue = document.querySelector(".imagenes");
+    queue.innerHTML = '';
     
     const storage = JSON.parse(localStorage.getItem("moviesQueue"));
-    let ulImg = document.createElement('ul');
-    ulImg.classList.add('imagenes');
-    ulImg.classList.add('list');
-    watched.append(ulImg);
 
     storage.forEach(element => {
         let ilImg = document.createElement('li');
         ilImg.classList.add('divImg');
-        ulImg.append(ilImg);
+        queue.append(ilImg);
         
         let img = document.createElement('img');
         img.src = element.img;
@@ -65,6 +58,12 @@ const handlerShowbtnQueue = () =>{
         releaseYear.textContent = element.releaseYear;
         releaseYear.classList.add('imgDate');
         ilImg.append(releaseYear);
+
+        let idmovie = document.createElement('p');
+        idmovie.textContent = element.idmovie;
+        idmovie.classList.add('idmovie-hidden');
+        ilImg.append(idmovie);
+
     });
 
 };
