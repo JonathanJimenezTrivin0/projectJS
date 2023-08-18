@@ -60,7 +60,6 @@ function fetchAndDisplayData(page) {
   )
     .then(response => response.json())
     .then(data => {
-      //   console.log(data);
       const imagenes = document.querySelector('.imagenes');
       imagenes.innerHTML = '';
       let thePage = page;
@@ -69,67 +68,60 @@ function fetchAndDisplayData(page) {
         let img = document.createElement('img');
         img.src = 'https://image.tmdb.org/t/p/w500' + item.poster_path;
 
+        
+        let modalMovies = document.querySelector('.modalMovies');
         img.addEventListener('click', () => {
           toggleModal();
-
-          let modalImg = document.querySelector('.modalImg'); //document.createElement('img');
+          
+          let modalImg = modalMovies.querySelector('.modalImg'); //document.createElement('img');
           //   modalImg.classList.add('modalImg');
           modalImg.src = 'https://image.tmdb.org/t/p/w500' + item.poster_path;
           //   let modal1 = document.querySelector('.modal');
           //   modal1.innerHTML = '';
 
-          let idMovie = document.querySelector('.idmovie');
+          let idMovie = modalMovies.querySelector('.idmovie');
           idMovie.textContent = item.id;
 
-          let idPage = document.querySelector('.idpage');
+          let idPage = modalMovies.querySelector('.idpage');
           idPage.textContent = thePage;
-          console.log("thePage");
 
-          let buttonClose = document.querySelector('.boton-cerrar'); //document.createElement('button');
-          //   buttonClose.classList.add('boton-cerrar');
-          buttonClose.textContent = 'X';
-
-          buttonClose.addEventListener('click', () => {
-            toggleModal();
-          });
-
-          let modalTitle = document.querySelector('.modalTitle'); //document.createElement('h1');
+          let modalTitle = modalMovies.querySelector('.modalTitle'); //document.createElement('h1');
           //   modalTitle.classList.add('modalTitle');
           modalTitle.textContent =
             item.title && item.name
               ? item.title + ' | ' + item.name
               : item.title || item.name || 'No Title or Name Available';
 
-          let modalData = document.querySelector('.modaData'); //document.createElement('div');
+          let modalData = modalMovies.querySelector('.modaData'); //document.createElement('div');
           //   modalData.classList.add('modaData');
           modalData.textContent =
             'Vote/Votes\nPopularity\nOriginal Title\nGenre';
 
-          let modalDataValue = document.querySelector('.modaDataValue'); //document.createElement('div');
+          let modalDataValue = modalMovies.querySelector('.modaDataValue'); //document.createElement('div');
           //   modalDataValue.classList.add('modaDataValue');
           modalDataValue.textContent = `${item.popularity}\n${item.original_title}\n${imgDate.textContent}`;
 
-          let vote = document.querySelector('.vote'); //document.createElement('div');
+          let vote = modalMovies.querySelector('.vote'); //document.createElement('div');
           //   vote.classList.add('vote');
           vote.textContent = item.vote_average.toFixed(1);
 
-          let votes = document.querySelector('.votes'); //document.createElement('div');
+          let votes = modalMovies.querySelector('.votes'); //document.createElement('div');
           //   votes.classList.add('votes');
           votes.textContent = '/' + ' ' + ' ' + item.vote_count;
 
-          let modalDataoverview = document.querySelector('.modaDataoverview'); //document.createElement('p');
+          let modalDataoverview = modalMovies.querySelector('.modaDataoverview'); //document.createElement('p');
           //   modalDataoverview.classList.add('modaDataoverview');
           modalDataoverview.textContent = item.overview;
 
-          let modalDataButton1 = document.querySelector('.modalDataButton1'); //document.createElement('button');
+          let modalDataButton1 = modalMovies.querySelector('.modalDataButton1'); //document.createElement('button');
           //   modalDataButton1.classList.add('modalDataButton1');
           modalDataButton1.textContent = 'ADD TO WHATCHED';
 
-          let modalDataButton2 = document.querySelector('.modalDataButton2'); //document.createElement('button');
+          let modalDataButton2 = modalMovies.querySelector('.modalDataButton2'); //document.createElement('button');
           //   modalDataButton1.classList.add('modalDataButton1');
           modalDataButton2.textContent = 'ADD TO QUEUE';
 
-          let release = document.querySelector('.releaseYear');
+          let release = modalMovies.querySelector('.releaseYear');
           release.textContent =
           genero1Name +
           ',' +
@@ -242,6 +234,21 @@ function fetchAndDisplayData(page) {
     })
     .catch(error => console.error('Error:', error));
 }
+
+let buttonClose = document.querySelector('.boton-cerrar'); 
+buttonClose.addEventListener('click', () => {
+  toggleModal();
+});
+
+const fondo = document.querySelector('.container');
+const keyHandler = (event) => {
+  console.log(event.code);
+  if (event.code === "Escape") {
+    console.log(event.code);
+    toggleModal();
+  };
+}
+fondo.addEventListener("keydown", keyHandler);
 
 let buttonPage1 = document.querySelector('.firstButton');
 buttonPage1.addEventListener('click', () => {

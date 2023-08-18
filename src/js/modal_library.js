@@ -91,13 +91,6 @@ handlerShowMovie = (event) => {
                 let idPage = document.querySelector('.idpage');
                 idPage.textContent = elemt.idpage;
                 
-                let buttonClose = document.querySelector('.boton-cerrar');
-                buttonClose.textContent = 'X';
-                
-                buttonClose.addEventListener('click', () => {
-                    toggleModal();
-                });
-                
                 let modalTitle = document.querySelector('.modalTitle');
                 modalTitle.textContent =
                 item.title && item.name
@@ -154,6 +147,11 @@ handlerShowMovie = (event) => {
         });
     };   
 };
+
+let buttonClose = document.querySelector('.boton-cerrar'); 
+buttonClose.addEventListener('click', () => {
+    toggleModal();
+});
 
 btnWatched.addEventListener("click", () => {
     isWatched = true;

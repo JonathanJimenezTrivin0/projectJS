@@ -6,6 +6,7 @@
 }
 
 .divImg:hover {
+  cursor: pointer;
   scale: (1.1);
   border-radius: 10px;
   animation: scale 1000ms ease-in;
@@ -26,9 +27,6 @@
   100% {
     transform: scale(1);
   }
-}
-.movies:hover {
-  cursor: pointer;
 }
 
 .imagenes {
