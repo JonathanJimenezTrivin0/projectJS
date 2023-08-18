@@ -1,52 +1,172 @@
 .modalMovies {
-    width: 528px;
-    height: 581px;
-    background-color: $primary-color;
+    width: 882px;
+    height: 568px;
+    background: $primary-color;
+    position: relative;
     position: fixed;
     display: flex;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 3;
-    // position: absolute;
-    // top: 50%;
-    // left: 50%;
-    // width: 528px;
-    // height: 581px;
-    // border-radius: 4px;
-    // background: #ffffff;
-    // transform: translate(-50%, -50%) scale(1);
-    // transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-// .modal {
-//   width: 528px;
-//   height: 581px;
-//   background-color: $primary-color;
-//   position: fixed;
-//   display: flex;
-//   top: 50%;
-//   left: 50%;
-//   transform: translate(-50%, -50%);
-//   z-index: 3;
-// }
-
-.is-hidden {
-  display: none;
-  height: auto;
-}
-
-
-
-// @media screen and (max-width: 767px) {
-
-// }
-
-// @media screen and (min-width: 768px) {
-
-// }
-
-// @media screen and (min-width: 1024px) {
-
-
-// }
+    z-index: 10;
+  }
+  
+  .is-hidden {
+    display: none;
+  }
+  
+  .boton-cerrar {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background-color: #fff;
+    border: none;
+    font-size: 20px;
+  }
+  
+  .modalTitle {
+    height: 40px;
+    color: #000;
+    font-family: Roboto;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    position: absolute;
+    left: 456px;
+    top: 30px;
+    overflow: hidden;
+  }
+  
+  .modalImg {
+    width: 396px;
+    height: 477.803px;
+    position: absolute;
+    left: 30px;
+    top: 50px;
+    border-radius: 5px;
+  }
+  
+  .modaData {
+    color: #8c8c8c;
+    font-family: Roboto;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    position: absolute;
+    left: 456px;
+    top: 101px;
+    line-height: 32px;
+    height: 120px;
+    width: 70px;
+    overflow: hidden;
+  }
+  
+  .modaDataValue {
+    height: 90px;
+    width: 70px;
+    color: #000;
+    font-family: Roboto;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 32px;
+    position: absolute;
+    right: 200px;
+    top: 136px;
+    overflow: hidden;
+  }
+  
+  .modaDataoverview {
+    width: 396px;
+    height: 160px;
+    color: #000;
+    font-family: Roboto;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    position: absolute;
+    right: 30px;
+    top: 241px;
+    overflow: hidden;
+  }
+  
+  .modalDataButton2 {
+    border-radius: 5px;
+    border: 1px solid #000;
+    width: 136px;
+    height: 44px;
+    position: absolute;
+    right: 139px;
+    top: 422px;
+  }
+  
+  .modalDataButton1 {
+    border-radius: 5px;
+    border: 1px solid #000;
+    width: 136px;
+    height: 44px;
+    position: absolute;
+    right: 290px;
+    top: 422px;
+  }
+  
+  .modalDataButton1:hover {
+    color: #fff;
+    border-radius: 5px;
+    background-color: #ff6b01;
+  }
+  
+  .modalDataButton2:hover {
+    color: #fff;
+    border-radius: 5px;
+    background-color: #ff6b01;
+  }
+  
+  .backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Color negro con 60% de opacidad */
+    z-index: 2; /* Asegura que la capa esté en frente de otros elementos */
+  }
+  
+  .vote {
+    width: 36px;
+    height: 16px;
+    border-radius: 5px;
+    background: #ff6b01;
+    color: #fff;
+    text-align: center;
+    font-family: Roboto;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: uppercase;
+    right: 237px;
+    top: 110px;
+    position: absolute;
+    overflow: hidden;
+  }
+  
+  .votes {
+    width: 50px;
+    height: 14px;
+    color: #000;
+    text-align: center;
+    font-family: Roboto;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: uppercase;
+    position: absolute;
+    left: 640px;
+    top: 110px;
+  }
