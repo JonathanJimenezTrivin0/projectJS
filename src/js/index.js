@@ -45,7 +45,6 @@ const genres = [
 ];
 
 let page = 5;
-
 function toggleModal() {
   const modal = document.querySelector("[data-modal]");
   modal.classList.toggle("is-hidden");
@@ -221,40 +220,113 @@ buttonPageRight.addEventListener('click', () => {
 let searchButton = document.querySelector('.form__icon');
 
 searchButton.addEventListener('click', () => {
-    let searchInput = document.querySelector('.form__label1').value.toLowerCase();
-    fetchAndSearchData(searchInput);
-});
+  let searchInput = document.querySelector('.form__label1').value.toLowerCase();
 
-function fetchAndSearchData(searchTerm) {
-    let currentPage = 1;
-    let filteredResults = [];
+  const apiKey = 'dddbef6a1c9b27a703129ac3cab56874'; 
+  const baseUrl = 'https://api.themoviedb.org/3/search/movie';
+  const apiUrl = `${baseUrl}?query=${searchInput}&api_key=${apiKey}`;
 
-    function fetchPage(page) {
-        console.log("Fetching data for page:", page);
-        fetch(`https://api.themoviedb.org/3/trending/all/day?page=${page}&language=en-US`, config)
-            .then(response => response.json())
-            .then(data => {
-                const filteredMovies = data.results.filter(item => {
-                    const titleWords = [
-                        item.title,
-                        item.original_title,
-                        item.name
-                    ].filter(Boolean);
+  fetch(apiUrl)
+    .then(response => response.json())
+    .then(data => {
+      console.log('Resultados de búsqueda:', data.results);
 
-                    return titleWords.some(title => new RegExp(`\\b${searchTerm}\\b`).test(title.toLowerCase()));
-                });
+      const imagenes = document.querySelector('.imagenes');
+      imagenes.innerHTML = '';
 
-                filteredResults = filteredResults.concat(filteredMovies);
+      for (const item of data.results) {
+        let img = document.createElement('img');
+        img.src = 'https://image.tmdb.org/t/p/w500' + item.poster_path;
 
-                if (data.page < data.total_pages) {
-                    fetchPage(page + 1); // Fetch next page
-                } else {
-                    // Display or process filteredResults here
-                    console.log('Filtered movies:', filteredResults);
-                }
-            })
-            .catch(error => console.error('Error:', error));
-    }
+        img.addEventListener('click', () => {
+          toggleModal();
 
-    fetchPage(currentPage);
-}
+          let modalImg = document.createElement('img');
+          modalImg.classList.add('modalImg');
+          modalImg.src = 'https://image.tmdb.org/t/p/w500' + item.poster_path;
+          let modal1 = document.querySelector('.modal');
+          modal1.innerHTML = '';
+
+          let buttonClose = document.createElement('button');
+          buttonClose.classList.add('boton-cerrar');
+          buttonClose.textContent = 'X';
+
+          buttonClose.addEventListener('click', () => {
+            toggleModal();
+          });
+
+          let modalTitle = document.createElement('h1');
+          modalTitle.classList.add('modalTitle');
+          modalTitle.textContent = (item.title && item.name) ? item.title + ' | ' + item.name : (item.title || item.name || 'No Title or Name Available');
+
+          let modalData = document.createElement('div');
+          modalData.classList.add('modaData');
+          modalData.textContent = "Vote/Votes\nPopularity\nOriginal Title\nGenre";
+
+          let modalDataValue = document.createElement('div');
+          modalDataValue.classList.add('modaDataValue');
+          modalDataValue.textContent = `${item.popularity}\n${item.original_title}\n${imgDate.textContent}`;
+
+          let vote = document.createElement('div');
+          vote.classList.add('vote');
+          vote.textContent = item.vote_average.toFixed(1);
+
+          let votes = document.createElement('div');
+          votes.classList.add('votes');
+          votes.textContent = '/' + ' ' + ' ' + item.vote_count;
+
+          let modalDataoverview = document.createElement('p');
+          modalDataoverview.classList.add('modaDataoverview');
+          modalDataoverview.textContent = item.overview;
+
+          let modalDataButton1 = document.createElement('button');
+          modalDataButton1.classList.add('modalDataButton1');
+          modalDataButton1.textContent = "ADD TO WHATCHED";
+
+          let modalDataButton2 = document.createElement('button');
+          modalDataButton2.classList.add('modalDataButton2');
+          modalDataButton2.textContent = "ADD TO QUEUE";
+
+          modal1.append(modalImg);
+          modal1.append(buttonClose);
+          modal1.append(modalTitle);
+          modal1.append(modalData);
+          modal1.append(modalDataValue);
+          modal1.append(modalDataoverview);
+          modal1.append(modalDataButton1);
+          modal1.append(modalDataButton2);
+          modal1.append(vote);
+          modal1.append(votes);
+        });
+        
+        let divImg = document.createElement('div');
+              divImg.classList.add('divImg');
+              img.setAttribute('data-modal-open', 'true');
+              imagenes.append(divImg);
+              divImg.append(img);
+
+              let imgName = document.createElement('p');
+              imgName.textContent = (item.title && item.name) ? item.title + ' | ' + item.name : (item.title || item.name || 'No Title or Name Available');
+              imgName.classList.add('imgName');
+              divImg.append(imgName);
+
+              let imgDate = document.createElement('p');
+              let releaseYear = item.release_date ? item.release_date.substring(0, 4) : '';
+              let airYear = item.first_air_date ? item.first_air_date.substring(0, 4) : '';
+              let genero1 = genres.find(genre => genre.id === item.genre_ids[0]);
+              let genero2 = genres.find(genre => genre.id === item.genre_ids[1]);
+              let genero1Name = genero1 ? genero1.name : '';
+                let genero2Name = genero2 ? genero2.name : '';
+                imgDate.textContent = genero1Name + ',' + ' ' + genero2Name + ' ' + '|' + ' ' + releaseYear + airYear;
+                imgDate.classList.add('imgDate');
+                divImg.append(imgDate);
+            }// Cierre del evento click para la imagen
+       // Cierre del ciclo for
+    }) // Cierre del segundo .then
+    .catch(error => {
+      console.error('Error:', error);
+    });
+}); // Cierre del evento click para el botón searchButton
+
+
+  fetchAndDisplayData(page);
