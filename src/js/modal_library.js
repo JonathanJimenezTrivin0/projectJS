@@ -49,13 +49,12 @@ function toggleModal() {
     modal.classList.toggle('is-hidden');
 }
 
-const config = {
-    method: 'get',
-    headers: {
+const options = {
+method: 'GET',
+headers: {
     accept: 'application/json',
-    Authorization:
-    'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGRiZWY2YTFjOWIyN2E3MDMxMjlhYzNjYWI1Njg3NCIsInN1YiI6IjY0ZDc4OWE2ZjE0ZGFkMDBjNmY4OWYyNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.WOzD3u8rGMt6ZD7EBNTm1yebNIP2CPIdxxC_lroP4TY',
-    },
+    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxM2IxMmRlNzU3ZDg3NmIyNjY0ZWFjYzE0OTQzMDY1NCIsInN1YiI6IjY0ZGZkMDkwNWFiODFhMDBmZmMxZTJlNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.-QnlW9CUKAbJQk-rqR2PWRClOwb4rEGk6_5_LysamjU'
+}
 };
 
 handlerShowMovie = (event) => {
@@ -69,83 +68,77 @@ handlerShowMovie = (event) => {
     }
     const elemt = storage.find(option => option.img == event.target.src);
     
-    if (elemt){
+    fetch(
+        `https://api.themoviedb.org/3/movie/${elemt.idmovie}?language=en-US`,
+        options
+    )
+    .then(response => response.json())
+    .then(data => {
+        const item = data;
+        toggleModal();   
+        
+        let modalImg = document.querySelector('.modalImg');
+        modalImg.src = 'https://image.tmdb.org/t/p/w500' + item.poster_path;
+        
+        let idMovie = document.querySelector('.idmovie');
+        idMovie.textContent = item.id;
+        
+        let idPage = document.querySelector('.idpage');
+        idPage.textContent = elemt.idpage;
+        
+        let modalTitle = document.querySelector('.modalTitle');
+        modalTitle.textContent =
+        item.title && item.name
+        ? item.title + ' | ' + item.name
+        : item.title || item.name || 'No Title or Name Available';
+        
+        let modalData = document.querySelector('.modaData');
+        modalData.textContent =
+        'Vote/Votes\nPopularity\nOriginal Title\nGenre';
+        
+        let releaseYear = item.release_date
+        ? item.release_date.substring(0, 4)
+        : '';
+        let airYear = item.release_date
+        ? item.release_date.substring(0, 4)
+        : '';
+        let genero1 = genres.find(genre => genre.id === item.genres[0].id);
+        let genero2 = genres.find(genre => genre.id === item.genres[1].id);
+        let genero1Name = genero1 ? genero1.name : '';
+        let genero2Name = genero2 ? genero2.name : '';
+        let imgDate =
+        genero1Name +
+        ',' +
+        ' ' +
+        genero2Name +
+        ' ' +
+        '|' +
+        ' ' +
+        releaseYear +
+        airYear;
 
-        fetch(
-            `https://api.themoviedb.org/3/trending/all/day?page=${elemt.idpage}&language=en-US`,
-        config
-        )
-        .then(response => response.json())
-        .then(data => {
-            const bd = data.results;
-            const item = bd.find(option => option.id == elemt.idmovie);
-            if (item){
-                toggleModal();   
-                
-                let modalImg = document.querySelector('.modalImg');
-                modalImg.src = 'https://image.tmdb.org/t/p/w500' + item.poster_path;
-                
-                let idMovie = document.querySelector('.idmovie');
-                idMovie.textContent = item.id;
-                
-                let idPage = document.querySelector('.idpage');
-                idPage.textContent = elemt.idpage;
-                
-                let modalTitle = document.querySelector('.modalTitle');
-                modalTitle.textContent =
-                item.title && item.name
-                ? item.title + ' | ' + item.name
-                : item.title || item.name || 'No Title or Name Available';
-                
-                let modalData = document.querySelector('.modaData');
-                modalData.textContent =
-                'Vote/Votes\nPopularity\nOriginal Title\nGenre';
-                
-                let releaseYear = item.release_date
-                ? item.release_date.substring(0, 4)
-                : '';
-                let airYear = item.first_air_date
-                ? item.first_air_date.substring(0, 4)
-                : '';
-                let genero1 = genres.find(genre => genre.id === item.genre_ids[0]);
-                let genero2 = genres.find(genre => genre.id === item.genre_ids[1]);
-                let genero1Name = genero1 ? genero1.name : '';
-                let genero2Name = genero2 ? genero2.name : '';
-                let imgDate =
-                genero1Name +
-                ',' +
-                ' ' +
-                genero2Name +
-                ' ' +
-                '|' +
-                ' ' +
-                releaseYear +
-                airYear;
+        let modalDataValue = document.querySelector('.modaDataValue');
+        modalDataValue.textContent = `${item.popularity}\n${item.original_title}\n${imgDate}`;
+        
+        let vote = document.querySelector('.vote');
+        vote.textContent = item.vote_average.toFixed(1);
+        
+        let votes = document.querySelector('.votes');
+        votes.textContent = '/' + ' ' + ' ' + item.vote_count;
+        
+        let modalDataoverview = document.querySelector('.modaDataoverview');
+        modalDataoverview.textContent = item.overview;
+        
+        let modalDataButton1 = document.querySelector('.modalDataButton1');
+        modalDataButton1.textContent = 'ADD TO WHATCHED';
+        
+        let modalDataButton2 = document.querySelector('.modalDataButton2');
+        modalDataButton2.textContent = 'ADD TO QUEUE';
+        
+        let release = document.querySelector('.releaseYear');
+        release.textContent = imgDate;
+    });
 
-                let modalDataValue = document.querySelector('.modaDataValue');
-                modalDataValue.textContent = `${item.popularity}\n${item.original_title}\n${imgDate}`;
-                
-                let vote = document.querySelector('.vote');
-                vote.textContent = item.vote_average.toFixed(1);
-                
-                let votes = document.querySelector('.votes');
-                votes.textContent = '/' + ' ' + ' ' + item.vote_count;
-                
-                let modalDataoverview = document.querySelector('.modaDataoverview');
-                modalDataoverview.textContent = item.overview;
-                
-                let modalDataButton1 = document.querySelector('.modalDataButton1');
-                modalDataButton1.textContent = 'ADD TO WHATCHED';
-                
-                let modalDataButton2 = document.querySelector('.modalDataButton2');
-                modalDataButton2.textContent = 'ADD TO QUEUE';
-                
-                let release = document.querySelector('.releaseYear');
-                release.textContent = imgDate;
-                
-            };
-        });
-    };   
 };
 
 let buttonClose = document.querySelector('.boton-cerrar'); 
