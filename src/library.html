@@ -40,7 +40,28 @@
         </div>
       </div>
     </header>
-    <section class="watched container"></section>
+    <section class="category container">
+      <ul class="imagenes list"></ul>
+    </section>
+    <div class="backdrop is-hidden" data-modal>
+      <div class="modalMovies">
+        <img src="#" alt="modal" class="modalImg" />
+        <button class="boton-cerrar">X</button>
+        <h1 class="modalTitle"></h1>
+        <div class="modaData"></div>
+        <div class="modaDataValue"></div>
+        <p class="modaDataoverview"></p>
+        <button class="modalDataButton1"></button>
+        <button class="modalDataButton2"></button>
+        <div class="vote"></div>
+        <div class="votes"></div>
+        <div class="keys">
+          <p class="idmovie"></p>
+          <p class="idpage"></p>
+          <p class="releaseYear"></p>
+        </div>
+      </div>
+    </div>
     <footer class="footer">
       <ul class="footer__content list">
         <li class="footer__text">
@@ -52,11 +73,30 @@
             <svg class="footer__icon">
               <use href="./images/icon.svg#icon-favorite"></use>
             </svg>
-            <p><u>by GoIT Students</u></p>
+            <p id="openModalBtn" class="footer__description">
+              <u>by GoIT Students</u>
+            </p>
+            <div id="myModal" class="modal__ftr">
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                <ul class="modal__ul">
+                  <li class="modal__list">
+                    <h1 class="modal__list-color">Grupo #3</h1>
+                  </li>
+
+                  <li class="modal__list"><h2>Cristian Arango</h2></li>
+                  <li class="modal__list"><h2>Juan Manual Acevedo</h2></li>
+                  <li class="modal__list"><h2>Jonathan Jimenez</h2></li>
+                </ul>
+              </div>
+            </div>
           </div>
         </li>
       </ul>
     </footer>
     <script src="./js/showCategory.js" type="module"></script>
+    <script src="./js/modal_library.js" type="module"></script>
+    <script src="./js/modalFooter.js" type="module"></script>
+    <script src="./js/addCategory.js" type="module"></script>
   </body>
 </html>

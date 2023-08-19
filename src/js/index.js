@@ -60,7 +60,6 @@ function fetchAndDisplayData(page) {
   )
     .then(response => response.json())
     .then(data => {
-      //   console.log(data);
       const imagenes = document.querySelector('.imagenes');
       imagenes.innerHTML = '';
       let thePage = page;
@@ -69,72 +68,59 @@ function fetchAndDisplayData(page) {
         let img = document.createElement('img');
         img.src = 'https://image.tmdb.org/t/p/w500' + item.poster_path;
 
+        
+        let modalMovies = document.querySelector('.modalMovies');
         img.addEventListener('click', () => {
           toggleModal();
-
-          let modalImg = document.querySelector('.modalImg'); //document.createElement('img');
-          //   modalImg.classList.add('modalImg');
+          
+          let modalImg = modalMovies.querySelector('.modalImg'); 
           modalImg.src = 'https://image.tmdb.org/t/p/w500' + item.poster_path;
-          //   let modal1 = document.querySelector('.modal');
-          //   modal1.innerHTML = '';
 
-          let idMovie = document.querySelector('.idmovie');
+          let idMovie = modalMovies.querySelector('.idmovie');
           idMovie.textContent = item.id;
 
-          let buttonClose = document.querySelector('.boton-cerrar'); //document.createElement('button');
-          //   buttonClose.classList.add('boton-cerrar');
-          buttonClose.textContent = 'X';
+          let idPage = modalMovies.querySelector('.idpage');
+          idPage.textContent = thePage;
 
-          buttonClose.addEventListener('click', () => {
-            toggleModal();
-          });
-
-          let modalTitle = document.querySelector('.modalTitle'); //document.createElement('h1');
-          //   modalTitle.classList.add('modalTitle');
+          let modalTitle = modalMovies.querySelector('.modalTitle');
           modalTitle.textContent =
             item.title && item.name
               ? item.title + ' | ' + item.name
               : item.title || item.name || 'No Title or Name Available';
 
-          let modalData = document.querySelector('.modaData'); //document.createElement('div');
-          //   modalData.classList.add('modaData');
+          let modalData = modalMovies.querySelector('.modaData');
           modalData.textContent =
             'Vote/Votes\nPopularity\nOriginal Title\nGenre';
 
-          let modalDataValue = document.querySelector('.modaDataValue'); //document.createElement('div');
-          //   modalDataValue.classList.add('modaDataValue');
+          let modalDataValue = modalMovies.querySelector('.modaDataValue');
           modalDataValue.textContent = `${item.popularity}\n${item.original_title}\n${imgDate.textContent}`;
 
-          let vote = document.querySelector('.vote'); //document.createElement('div');
-          //   vote.classList.add('vote');
+          let vote = modalMovies.querySelector('.vote');
           vote.textContent = item.vote_average.toFixed(1);
 
-          let votes = document.querySelector('.votes'); //document.createElement('div');
-          //   votes.classList.add('votes');
+          let votes = modalMovies.querySelector('.votes');
           votes.textContent = '/' + ' ' + ' ' + item.vote_count;
 
-          let modalDataoverview = document.querySelector('.modaDataoverview'); //document.createElement('p');
-          //   modalDataoverview.classList.add('modaDataoverview');
+          let modalDataoverview = modalMovies.querySelector('.modaDataoverview');
           modalDataoverview.textContent = item.overview;
 
-          let modalDataButton1 = document.querySelector('.modalDataButton1'); //document.createElement('button');
-          //   modalDataButton1.classList.add('modalDataButton1');
+          let modalDataButton1 = modalMovies.querySelector('.modalDataButton1');
           modalDataButton1.textContent = 'ADD TO WHATCHED';
 
-          let modalDataButton2 = document.querySelector('.modalDataButton2'); //document.createElement('button');
-          //   modalDataButton1.classList.add('modalDataButton1');
+          let modalDataButton2 = modalMovies.querySelector('.modalDataButton2');
           modalDataButton2.textContent = 'ADD TO QUEUE';
 
-          //   modal1.append(modalImg);
-          //   modal1.append(buttonClose);
-          //   modal1.append(modalTitle);
-          //   modal1.append(modalData);
-          //   modal1.append(modalDataValue);
-          //   modal1.append(modalDataoverview);
-          //   modal1.append(modalDataButton1);
-          //   modal1.append(modalDataButton2);
-          //   modal1.append(vote);
-          //   modal1.append(votes);
+          let release = modalMovies.querySelector('.releaseYear');
+          release.textContent =
+          genero1Name +
+          ',' +
+          ' ' +
+          genero2Name +
+          ' ' +
+          '|' +
+          ' ' +
+          releaseYear +
+          airYear;
         });
 
         let divImg = document.createElement('div');
@@ -175,17 +161,6 @@ function fetchAndDisplayData(page) {
         imgDate.classList.add('imgDate');
         divImg.append(imgDate);
 
-        let release = document.querySelector('.releaseYear');
-        release.textContent =
-          genero1Name +
-          ',' +
-          ' ' +
-          genero2Name +
-          ' ' +
-          '|' +
-          ' ' +
-          releaseYear +
-          airYear;
       }
 
       // ... (creación de botones de página)
@@ -239,6 +214,11 @@ function fetchAndDisplayData(page) {
     .catch(error => console.error('Error:', error));
 }
 
+let buttonClose = document.querySelector('.boton-cerrar'); 
+buttonClose.addEventListener('click', () => {
+  toggleModal();
+});
+
 let buttonPage1 = document.querySelector('.firstButton');
 buttonPage1.addEventListener('click', () => {
   fetchAndDisplayData(1);
@@ -256,5 +236,145 @@ buttonPageRight.addEventListener('click', () => {
   fetchAndDisplayData(page);
 });
 
-// Llamar a la función inicial para cargar los datos
+
+const searchInput = document.querySelector('.backdrop');
+console.log(searchInput);
+const keyHandler = (event) => {
+  event.preventDefault();
+  console.log(event);
+  // if (event.code === "Escape") {
+  //   console.log(event.code);
+  //   toggleModal();
+  // };
+}
+searchInput.addEventListener("keydown", keyHandler);
+
+let searchButton = document.querySelector('.form__icon');
+searchButton.addEventListener('click', () => {
+  let searchInput = document.querySelector('.form__label1').value.toLowerCase();
+
+  const apiKey = 'dddbef6a1c9b27a703129ac3cab56874'; 
+  const baseUrl = 'https://api.themoviedb.org/3/search/movie';
+  const apiUrl = `${baseUrl}?query=${searchInput}&api_key=${apiKey}`;
+
+  fetch(apiUrl)
+    .then(response => response.json())
+    .then(data => {
+      console.log('Resultados de búsqueda:', data.results);
+
+      const imagenes = document.querySelector('.imagenes');
+      imagenes.innerHTML = '';
+
+      const thePage = data.page;
+      for (const item of data.results) {
+        let img = document.createElement('img');
+        img.src = 'https://image.tmdb.org/t/p/w500' + item.poster_path;
+
+        let modalMovies = document.querySelector('.modalMovies');
+        img.addEventListener('click', () => {
+          toggleModal();
+          
+          let modalImg = modalMovies.querySelector('.modalImg'); 
+          modalImg.src = 'https://image.tmdb.org/t/p/w500' + item.poster_path;
+
+          let idMovie = modalMovies.querySelector('.idmovie');
+          idMovie.textContent = item.id;
+
+          let idPage = modalMovies.querySelector('.idpage');
+          idPage.textContent = thePage;
+
+          let modalTitle = modalMovies.querySelector('.modalTitle');
+          modalTitle.textContent =
+            item.title && item.name
+              ? item.title + ' | ' + item.name
+              : item.title || item.name || 'No Title or Name Available';
+
+          let modalData = modalMovies.querySelector('.modaData');
+          modalData.textContent =
+            'Vote/Votes\nPopularity\nOriginal Title\nGenre';
+
+          let modalDataValue = modalMovies.querySelector('.modaDataValue');
+          modalDataValue.textContent = `${item.popularity}\n${item.original_title}\n${imgDate.textContent}`;
+
+          let vote = modalMovies.querySelector('.vote');
+          vote.textContent = item.vote_average.toFixed(1);
+
+          let votes = modalMovies.querySelector('.votes');
+          votes.textContent = '/' + ' ' + ' ' + item.vote_count;
+
+          let modalDataoverview = modalMovies.querySelector('.modaDataoverview');
+          modalDataoverview.textContent = item.overview;
+
+          let modalDataButton1 = modalMovies.querySelector('.modalDataButton1');
+          modalDataButton1.textContent = 'ADD TO WHATCHED';
+
+          let modalDataButton2 = modalMovies.querySelector('.modalDataButton2');
+          modalDataButton2.textContent = 'ADD TO QUEUE';
+
+          let release = modalMovies.querySelector('.releaseYear');
+          release.textContent =
+          genero1Name +
+          ',' +
+          ' ' +
+          genero2Name +
+          ' ' +
+          '|' +
+          ' ' +
+          releaseYear +
+          airYear;
+        });
+
+        let divImg = document.createElement('div');
+        divImg.classList.add('divImg');
+        img.setAttribute('data-modal-open', 'true');
+        imagenes.append(divImg);
+        divImg.append(img);
+
+        let imgName = document.createElement('p');
+        imgName.textContent =
+          item.title && item.name
+            ? item.title + ' | ' + item.name
+            : item.title || item.name || 'No Title or Name Available';
+        imgName.classList.add('imgName');
+        divImg.append(imgName);
+
+        let imgDate = document.createElement('p');
+        let releaseYear = item.release_date
+          ? item.release_date.substring(0, 4)
+          : '';
+        let airYear = item.first_air_date
+          ? item.first_air_date.substring(0, 4)
+          : '';
+        let genero1 = genres.find(genre => genre.id === item.genre_ids[0]);
+        let genero2 = genres.find(genre => genre.id === item.genre_ids[1]);
+        let genero1Name = genero1 ? genero1.name : '';
+        let genero2Name = genero2 ? genero2.name : '';
+        imgDate.textContent =
+          genero1Name +
+          ',' +
+          ' ' +
+          genero2Name +
+          ' ' +
+          '|' +
+          ' ' +
+          releaseYear +
+          airYear;
+        imgDate.classList.add('imgDate');
+        divImg.append(imgDate);
+      }// Cierre del evento click para la imagen
+       // Cierre del ciclo for
+    }) // Cierre del segundo .then
+    .catch(error => {
+      console.error('Error:', error);
+    });
+}); // Cierre del evento click para el botón searchButton
+
+
+
 fetchAndDisplayData(page);
+
+
+
+
+
+

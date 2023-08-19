@@ -18,8 +18,12 @@
     "url": "https://github.com/goitacademy/parcel-project-template/issues"
   },
   "dependencies": {
+    "audit": "^0.0.6",
     "basiclightbox": "^5.0.4",
+    "fix": "^0.0.6",
     "modern-normalize": "^1.1.0",
+    "notiflix": "^3.2.6",
+    "npm": "^9.8.1",
     "simplelightbox": "^2.14.1"
   },
   "devDependencies": {

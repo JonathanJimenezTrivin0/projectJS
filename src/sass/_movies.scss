@@ -6,6 +6,7 @@
 }
 
 .divImg:hover {
+  cursor: pointer;
   scale: (1.1);
   border-radius: 10px;
   animation: scale 1000ms ease-in;
@@ -27,13 +28,10 @@
     transform: scale(1);
   }
 }
-.movies:hover {
-  cursor: pointer;
-}
 
 .imagenes {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 30px;
   border-radius: 10px;
