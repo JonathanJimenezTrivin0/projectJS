@@ -15,3 +15,5 @@ window.addEventListener('click', event => {
     modalFtr.style.display = 'none';
   }
 });
+
+// -------------------------------form

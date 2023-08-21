@@ -68,12 +68,11 @@ function fetchAndDisplayData(page) {
         let img = document.createElement('img');
         img.src = 'https://image.tmdb.org/t/p/w500' + item.poster_path;
 
-        
         let modalMovies = document.querySelector('.modalMovies');
         img.addEventListener('click', () => {
           toggleModal();
-          
-          let modalImg = modalMovies.querySelector('.modalImg'); 
+
+          let modalImg = modalMovies.querySelector('.modalImg');
           modalImg.src = 'https://image.tmdb.org/t/p/w500' + item.poster_path;
 
           let idMovie = modalMovies.querySelector('.idmovie');
@@ -101,7 +100,8 @@ function fetchAndDisplayData(page) {
           let votes = modalMovies.querySelector('.votes');
           votes.textContent = '/' + ' ' + ' ' + item.vote_count;
 
-          let modalDataoverview = modalMovies.querySelector('.modaDataoverview');
+          let modalDataoverview =
+            modalMovies.querySelector('.modaDataoverview');
           modalDataoverview.textContent = item.overview;
 
           let modalDataButton1 = modalMovies.querySelector('.modalDataButton1');
@@ -112,15 +112,15 @@ function fetchAndDisplayData(page) {
 
           let release = modalMovies.querySelector('.releaseYear');
           release.textContent =
-          genero1Name +
-          ',' +
-          ' ' +
-          genero2Name +
-          ' ' +
-          '|' +
-          ' ' +
-          releaseYear +
-          airYear;
+            genero1Name +
+            ',' +
+            ' ' +
+            genero2Name +
+            ' ' +
+            '|' +
+            ' ' +
+            releaseYear +
+            airYear;
         });
 
         let divImg = document.createElement('div');
@@ -160,7 +160,6 @@ function fetchAndDisplayData(page) {
           airYear;
         imgDate.classList.add('imgDate');
         divImg.append(imgDate);
-
       }
 
       // ... (creación de botones de página)
@@ -214,7 +213,7 @@ function fetchAndDisplayData(page) {
     .catch(error => console.error('Error:', error));
 }
 
-let buttonClose = document.querySelector('.boton-cerrar'); 
+let buttonClose = document.querySelector('.boton-cerrar');
 buttonClose.addEventListener('click', () => {
   toggleModal();
 });
@@ -236,24 +235,31 @@ buttonPageRight.addEventListener('click', () => {
   fetchAndDisplayData(page);
 });
 
+// ----------------------cerrar ventana modal oprimiendo la tecla Escape--------------------------------
 
-const searchInput = document.querySelector('.backdrop');
-console.log(searchInput);
-const keyHandler = (event) => {
-  event.preventDefault();
-  console.log(event);
-  // if (event.code === "Escape") {
-  //   console.log(event.code);
-  //   toggleModal();
-  // };
+const backdrop = document.querySelector('.backdrop');
+
+window.addEventListener('keydown', e => {
+  if (e.code === 'Escape') {
+    backdrop.classList.add('is-hidden');
+  }
+});
+// ----------------------cerrar ventana modal oprimiendo la tecla Escape--------------------------------
+
+// --------------------------------preventDefault input-----------------------
+let formInput = document.querySelector('.form');
+
+formInput.addEventListener('submit', handleSubmit);
+
+function handleSubmit(e) {
+  e.preventDefault();
 }
-searchInput.addEventListener("keydown", keyHandler);
+// --------------------------------preventDefault input-----------------------
 
 let searchButton = document.querySelector('.form__icon');
 searchButton.addEventListener('click', () => {
   let searchInput = document.querySelector('.form__label1').value.toLowerCase();
-
-  const apiKey = 'dddbef6a1c9b27a703129ac3cab56874'; 
+  const apiKey = 'dddbef6a1c9b27a703129ac3cab56874';
   const baseUrl = 'https://api.themoviedb.org/3/search/movie';
   const apiUrl = `${baseUrl}?query=${searchInput}&api_key=${apiKey}`;
 
@@ -273,8 +279,8 @@ searchButton.addEventListener('click', () => {
         let modalMovies = document.querySelector('.modalMovies');
         img.addEventListener('click', () => {
           toggleModal();
-          
-          let modalImg = modalMovies.querySelector('.modalImg'); 
+
+          let modalImg = modalMovies.querySelector('.modalImg');
           modalImg.src = 'https://image.tmdb.org/t/p/w500' + item.poster_path;
 
           let idMovie = modalMovies.querySelector('.idmovie');
@@ -302,7 +308,8 @@ searchButton.addEventListener('click', () => {
           let votes = modalMovies.querySelector('.votes');
           votes.textContent = '/' + ' ' + ' ' + item.vote_count;
 
-          let modalDataoverview = modalMovies.querySelector('.modaDataoverview');
+          let modalDataoverview =
+            modalMovies.querySelector('.modaDataoverview');
           modalDataoverview.textContent = item.overview;
 
           let modalDataButton1 = modalMovies.querySelector('.modalDataButton1');
@@ -313,15 +320,15 @@ searchButton.addEventListener('click', () => {
 
           let release = modalMovies.querySelector('.releaseYear');
           release.textContent =
-          genero1Name +
-          ',' +
-          ' ' +
-          genero2Name +
-          ' ' +
-          '|' +
-          ' ' +
-          releaseYear +
-          airYear;
+            genero1Name +
+            ',' +
+            ' ' +
+            genero2Name +
+            ' ' +
+            '|' +
+            ' ' +
+            releaseYear +
+            airYear;
         });
 
         let divImg = document.createElement('div');
@@ -361,20 +368,12 @@ searchButton.addEventListener('click', () => {
           airYear;
         imgDate.classList.add('imgDate');
         divImg.append(imgDate);
-      }// Cierre del evento click para la imagen
-       // Cierre del ciclo for
+      } // Cierre del evento click para la imagen
+      // Cierre del ciclo for
     }) // Cierre del segundo .then
     .catch(error => {
       console.error('Error:', error);
     });
 }); // Cierre del evento click para el botón searchButton
 
-
-
 fetchAndDisplayData(page);
-
-
-
-
-
-
